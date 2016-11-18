@@ -2,5 +2,31 @@
   "name": "arduino_projects",
   "version": "1.0.0",
   "main": "server.js",
-  "license": "MIT"
+  "license": "MIT",
+  "dependencies": {
+    "aws-sdk": "^2.6.15",
+    "babel-polyfill": "^6.16.0",
+    "bcryptjs": "^2.3.0",
+    "body-parser": "^1.15.2",
+    "connect-flash": "^0.1.1",
+    "cookie-parser": "^1.4.3",
+    "dotenv": "^2.0.0",
+    "express": "^4.14.0",
+    "express-handlebars": "^3.0.0",
+    "express-session": "^1.14.0",
+    "express-validator": "^2.20.8",
+    "moment": "^2.14.1",
+    "mongodb": "^2.2.5",
+    "mongoose": "^4.5.7",
+    "monk": "^3.1.1",
+    "morgan": "^1.7.0",
+    "nodemailer": "^2.6.0",
+    "passport": "^0.3.2",
+    "passport-github": "^1.1.0",
+    "passport-google-oauth": "^1.0.0",
+    "passport-local": "^1.0.0",
+    "path": "^0.12.7",
+    "random-id-generator": "0.0.2",
+    "semantic-ui": "^2.2.4"
+  }
 }
