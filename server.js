@@ -8,17 +8,20 @@ var flash = require('connect-flash');
 var session = require('express-session');
 var passport = require('passport');
 var LocalStrategy = require('passport-local').Strategy;
+var GoogleStrategy = require('passport-google-oauth').OAuthStrategy;
+var GithubStrategy = require("passport-github").Strategy;
+var FacebookStrategy = require('passport-facebook').Strategy;
 var logger = require('morgan');
 var mongo = require('mongodb');
 var mongoose = require('mongoose');
-mongoose.connect('mongodb://localhost/3dmakarn');
+mongoose.connect('mongodb://localhost/arduinoprojects');
 var db = mongoose.connection;
 
 const config = require('./config.json');
 
 // New code
 var monk = require('monk');
-var db = monk('localhost:27017/3dmakarn');
+var db = monk('localhost:27017/arduinoprojects');
 
 var routes = require('./routes/index');
 // var admin = require('./routes/admin');
@@ -26,10 +29,17 @@ var routes = require('./routes/index');
 var app = express();
 
 const viewdir = __dirname + '/views/';
+const partialsdir = __dirname+'/views/partials/';
 const basedir = __dirname + '/public/';
 
 app.set('views', viewdir);
-app.engine('handlebars', exphbs({defaultLayout: 'layout'}));
+app.set('partials', partialsdir);
+app.engine('handlebars', exphbs({
+  defaultLayout: 'layout',
+  helpers: {
+    get_name: config.site.name
+  }
+}));
 app.set('view engine', 'handlebars');
 
 app.use(bodyParser.json()); // Support JSON Encoded bodies
@@ -39,12 +49,13 @@ app.use(express.static(basedir));
 
 // Express Session
 app.use(session({
-  secret: 'secret',
+  secret: 'arduinoprojects',
   saveUninitialized: true,
   resave: true
 }));
 
 // Passport init
+require('./config/passport')(passport);
 app.use(passport.initialize());
 app.use(passport.session());
 

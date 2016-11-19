@@ -1,0 +1,21 @@
+{{#if user.facebook.name}}
+<h2>Facebook</h2>
+<p>{{user.facebook.email}}</p>
+<p>{{user.facebook.name}}</p>
+<p>{{user.facebook.id}}</p>
+{{/if}}
+
+{{#if user.google.name}}
+<h2>Google</h2>
+<p>{{user.google.email}}</p>
+<p>{{user.google.name}}</p>
+<p>{{user.google.id}}</p>
+<p>{{user.local.admin}}</p>
+{{/if}}
+
+{{#if user.github.name}}
+<h2>Github</h2>
+<p>{{user.github.email}}</p>
+<p>{{user.github.name}}</p>
+<p>{{user.github.id}}</p>
+{{/if}}
