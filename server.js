@@ -37,7 +37,17 @@ app.set('partials', partialsdir);
 app.engine('handlebars', exphbs({
   defaultLayout: 'layout',
   helpers: {
-    get_name: config.site.name
+    get_name: config.site.name,
+    has_analytics: function(opts) {
+      const fnTrue = opts.fn;
+      const fnFalse = opts.inverse;
+      return (config.site.analytics && config.site.analytics !== false) ? fnTrue() : fnFalse();
+    },
+    get_analytics: function(opts) {
+      if (config.site.analytics) {
+        return config.site.analytics;
+      }
+    }
   }
 }));
 app.set('view engine', 'handlebars');

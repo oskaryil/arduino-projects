@@ -24,6 +24,9 @@ router.get('/sign-s3', function(req, res) {
   var fileType = req.query['file-type'];
   console.log(fileName);
   console.log(fileType);
+
+  fileName = fileName.replace(/\s+/g, '-');
+
   const s3Params = {
     Bucket: S3_BUCKET,
     Key: fileName,
@@ -47,6 +50,7 @@ router.get('/sign-s3', function(req, res) {
   });
 });
 
+
 router.get('/', function(req, res, next) {
 	res.render('index', {
 		title: 'Arduino Projects',
@@ -67,6 +71,12 @@ router.get('/login', function(req, res, next) {
   });
 });
 
+router.get('/about', function(req, res, next) {
+  res.render('about', {
+    title: 'Arduino Projects | About',
+  });
+});
+
 router.get('/locallogin', function(req, res, next) {
   res.render('local-login', {
     title: 'Arduino Porjects | Login'
@@ -79,21 +89,73 @@ router.get('/register', function(req, res, next) {
   });
 });
 
+router.get('/posts/:id', function(req, res, next) {
+  var db = req.db;
+  var collection = db.get('posts');
+
+  collection.findOne({_id: req.params.id}, function(e, post) {
+    res.render('post', {
+      title: post.postTitle + ' | Arduino Projects',
+      post: post,
+    });
+  });
+});
+
+router.get('/admin', ensureAdmin, function(req, res, next) {
+  res.render('admin', {
+    title: 'Arduino Projects | Admin Dashboard',
+    layout: 'dashboard-layout',
+    script: 'admin',
+  });
+});
+
+router.get('/api/posts', function(req, res, next) {
+  var db = req.db;
+  var collection = db.get('posts');
+
+  collection.find({}, {}, function(e, docs) {
+    res.send(docs.reverse());
+  });
+});
+
+router.get('/api/users', function(req, res, next) {
+  var db = req.db;
+  var collection = db.get('users');
+
+  collection.find({}, {}, function(e, docs) {
+    console.log(docs);
+    res.send(docs.reverse());
+  });
+});
+
+router.get('/api/user-posts', function(req, res, next) {
+  var db = req.db;
+  var collection = db.get('posts');
+
+  collection.find({"author.id": req.user.id}, {}, function(e, docs) {
+    console.log(docs);
+    res.send(docs.reverse());
+  });
+});
+
 router.post('/upload-project', function(req, res, next) {
-  var projectName = req.body.projectName;
+  var projectName = req.body.postTitle;
+  console.log(projectName);
   var components = req.body.components;
   var description = req.body.projectDescription;
+  var githubRepoLink = req.body.githubRepoLink;
   var author = {
     id: req.user.id || "",
     name: req.user.username || req.user.facebook.name || req.user.google.name || req.user.github.name,
-  };
+  };  
 
   var newPost = new Post();
-  newPost.title = projectName;
+  newPost.postTitle = projectName;
   newPost.components = components;
   newPost.description = description;
   newPost.author = author;
-
+  newPost.imgUrl = imgLink || "";
+  newPost.githubRepoUrl = githubRepoLink || "";
   newPost.save(function(err) {
     if (err) throw err;
   });
@@ -160,6 +222,7 @@ router.get('/logout', function(req, res, next) {
 router.get('/profile', ensureAuthenticated, function(req, res, next) {
   res.render('profile', {
     title: 'Arduino Projects | Profile',
+    script: 'profile',
     user: req.user,
   });
 });
@@ -189,6 +252,17 @@ function ensureAuthenticated(req, res, next) {
         req.flash('error_msg', 'Please Login to access your profile');
         res.redirect('/login');
     }
+}
+
+function ensureAdmin(req, res, next) {
+  if(req.isAuthenticated()) {
+    if(req.user.admin) {
+      return next();
+    }
+  } else {
+    req.flash('error_msg', 'You need to be an admin to access this page.');
+    res.redirect('/');
+  }
 }
 
 module.exports = router;

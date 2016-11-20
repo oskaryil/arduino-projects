@@ -38,19 +38,40 @@ $(document).ready(function() {
   function initUpload() {
     const files = document.getElementById('file-input').files;
     const file = files[0];
+    if(file.type === 'image/jpeg' || file.type === 'image/png') {
+      getSignedRequest(file);
+      return 'success';
+    } else {
+      // clearFileInput("file-input");
+      alert('Only .jpg and .png files are allowed');
+    }
     if(file == null) {
       alert('no file selected');
     }
-    getSignedRequest(file);
-    return 'success';
+      
   }
 
-  // $('#file-input').on('change', function() {
+  $('#file-input').on('change', function() {
     
-  //   if(initUpload() === 'success') {
-  //     $(".status").text('Filen har laddats upp utan problem!');
-  //   }
+    if(initUpload() === 'success') {
+      // $(".status").text('Filen har laddats upp utan problem!');
+    }
 
 
-  // });
+  });
+
+  function clearFileInput(id) { 
+    var oldInput = document.getElementById(id); 
+
+    var newInput = document.createElement("input"); 
+
+    newInput.type = "file"; 
+    newInput.id = oldInput.id; 
+    newInput.name = oldInput.name; 
+    newInput.className = oldInput.className; 
+    newInput.style.cssText = oldInput.style.cssText; 
+    // TODO: copy any other relevant attributes 
+
+    oldInput.parentNode.replaceChild(newInput, oldInput); 
+  }
 });

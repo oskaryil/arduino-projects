@@ -1,12 +1,13 @@
 <div class="container">
+  <h2 class="page-header">Upload a new project</h2>
   <form class="upload-form" action="/upload-project" method="post">
     <div class="form-group">
       <label for="project">Project name</label>
-      <input type="text" class="form-control" id="projectName" name="upload[projectName]" placeholder="Project name" required>
+      <input type="text" class="form-control" id="posttitle" name="postTitle" placeholder="Project name" required>
     </div>
     <div class="form-group">
       <label for="components">Compenents</label>
-      <input type="text" class="form-control" id="components" name="upload[components]" placeholder="Components" required>
+      <input type="text" class="form-control" id="components" name="components" placeholder="Components" required>
     </div>
     <div class="form-group">
       <label>Description</label>
@@ -14,12 +15,12 @@
     </div>
     <div class="form-group">
       <label for="github-repo-link">Link to Github repository</label>
-      <input type="text" class="form-control" id="github-repo-link" name="upload[githubRepoLink]">
+      <input type="text" class="form-control" id="github-repo-link" name="githubRepoLink">
     </div>
     <div class="form-group">
       <label for="upload">Images</label>
       <input type="file" name="file" id="file-input" required>
-      <p class="help-block">Upload an image of your project</p>
+      <p class="help-block">Upload an image of your project. Image must be <strong>.jpg or .png</strong></p>
     </div>
     <!--
     <div class="checkbox">

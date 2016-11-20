@@ -3,6 +3,23 @@ var bcrypt = require('bcryptjs');
 
 // User Schema
 var UserSchema = mongoose.Schema({
+  name: String,
+  email: String,
+  imgUrl: {
+    type: String,
+    default: "https://s3.amazonaws.com/whisperinvest-images/default.png"
+  },
+  admin: {
+    type: Boolean,
+    default: false
+  },
+  createdAt: {
+    type: Date,
+    default: Date.now
+  },
+  ip: {
+    type: String,
+  },
   local: {
     username: {
       type: String,
@@ -16,14 +33,6 @@ var UserSchema = mongoose.Schema({
     },
     name: {
       type: String
-    },
-    createdAt: {
-      type: Date,
-      default: Date.now
-    },
-    admin: {
-      type: Boolean,
-      default: false
     }
   },
   google: {

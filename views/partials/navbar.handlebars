@@ -17,9 +17,9 @@
 			</ul>
 			<ul class="nav navbar-nav navbar-right">
 				{{#if user}}
-					<li><a href="/profile">Account</a></li>
+					<li><a href="/profile">{{user.name}}</a></li>
 					<li><a href="/logout">Log out</a></li>
-				{{#if user.local.admin}}
+				{{#if user.admin}}
 					<li><a href="/admin">Admin Dashboard</a></li>
 				{{/if}}	
 				{{else}}

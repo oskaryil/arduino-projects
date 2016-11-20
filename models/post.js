@@ -1,7 +1,7 @@
 var mongoose = require('mongoose');
 
 var PostSchema = mongoose.Schema({
-  title: String,
+  postTitle: String,
   components: String,
   description: String,
   imgUrl: String,

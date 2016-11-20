@@ -57,7 +57,9 @@ module.exports = function(passport) {
               newUser.facebook.token = accessToken;
               newUser.facebook.name = profile.name.givenName + ' ' + profile.name.familyName;
               newUser.facebook.email = profile.emails[0].value;
-
+              newUser.email = profile.emails[0].value;
+              newUser.name = profile.name.givenName + ' ' + profile.name.familyName;
+              newUser.ip = req.ip;
               newUser.save(function(err){
                 if(err)
                   throw err;
@@ -81,7 +83,7 @@ passport.use(new GoogleStrategy({
           User.findOne({'google.id': profile.id}, function(err, user){
             if(err)
               return done(err);
-            if(user)
+            if(user) 
               return done(null, user);
             else {
               var newUser = new User();
@@ -89,7 +91,10 @@ passport.use(new GoogleStrategy({
               newUser.google.token = accessToken;
               newUser.google.name = profile.displayName;
               newUser.google.email = profile.emails[0].value;
-
+              newUser.email = profile.emails[0].value;
+              newUser.name= profile.displayName;
+              newUser.imgUrl = profile.photos[0].value;
+              newUser.ip = req.ip;
               newUser.save(function(err){
                 if(err)
                   throw err;
@@ -121,7 +126,9 @@ passport.use(new GithubStrategy({
               newUser.github.token = accessToken;
               newUser.github.name = profile.name;
               newUser.github.email = profile.email;
-
+              newUser.name = profile.name;
+              newUser.email = profile.email,
+              newUser.ip = req.ip;
               newUser.save(function(err){
                 if(err)
                   throw err;
