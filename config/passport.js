@@ -59,7 +59,6 @@ module.exports = function(passport) {
               newUser.facebook.email = profile.emails[0].value;
               newUser.email = profile.emails[0].value;
               newUser.name = profile.name.givenName + ' ' + profile.name.familyName;
-              newUser.ip = req.ip;
               newUser.save(function(err){
                 if(err)
                   throw err;
@@ -94,7 +93,6 @@ passport.use(new GoogleStrategy({
               newUser.email = profile.emails[0].value;
               newUser.name= profile.displayName;
               newUser.imgUrl = profile.photos[0].value;
-              newUser.ip = req.ip;
               newUser.save(function(err){
                 if(err)
                   throw err;
@@ -128,7 +126,6 @@ passport.use(new GithubStrategy({
               newUser.github.email = profile.email;
               newUser.name = profile.name;
               newUser.email = profile.email,
-              newUser.ip = req.ip;
               newUser.save(function(err){
                 if(err)
                   throw err;
