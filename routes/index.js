@@ -159,8 +159,11 @@ router.post('/upload-project', function(req, res, next) {
   newPost.save(function(err) {
     if (err) throw err;
   });
+  req.flash('success_msg', 'Your project has been uploaded successfully');
+  res.redirect('/');
 
   console.log(newPost);
+
 
 });
 
@@ -198,11 +201,12 @@ router.post('/register', function(req, res, next) {
     var newUser = new User();
     newUser.local.name = name;
     newUser.local.email = email;
-    newUser.local.username = username;
+    newUser.username = username;
     newUser.local.password = password;
 
     User.createUser(newUser, function(err, user) {
       if(err) throw err;
+      console.log(user);
     });
 
     req.flash('success_msg', 'You are registered and can now log in');

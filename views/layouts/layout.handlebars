@@ -15,6 +15,7 @@
 		<link href="/assets/css/bootstrap.min.css" rel="stylesheet">
 		<link href="/assets/css/font-awesome.min.css" rel="stylesheet">
 		<link href="/assets/css/bootstrap-social.css" rel="stylesheet">
+		<link rel="stylesheet" href="assets/animsition/css/animsition.min.css">
 
 		<!-- Custom styles for this template -->
 		<link href="/assets/css/main.css" rel="stylesheet">
@@ -30,17 +31,28 @@
 	</head>
 
 	<body>
-		{{> analytics}}
 
+		{{> analytics}}
 		{{> navbar}}
 
 		<div class="container-fluid">
 			<div class="row">
+			 {{#if success_msg}}
+			  <div class="alert alert-success">{{success_msg}}</div>
+			{{/if}}
 
+			{{#if error_msg}}
+			  <div class="alert alert-danger">{{error_msg}}</div>
+			{{/if}}
+
+			{{#if error}}
+			  <div class="alert alert-danger">{{error}}</div>
+			{{/if}}
 				{{{body}}}
 
 			</div>
 		</div>
+
 
 		<!-- Bootstrap core JavaScript
 		================================================== -->
@@ -48,6 +60,7 @@
 		<script src="/assets/js/jquery-3.1.1.min.js"></script>
 		<script src="/assets/js/bootstrap.min.js"></script>
 		<script src="/assets/js/salvattore.min.js"></script>
+		<script src="assets/animsition/js/animsition.min.js"></script>
 		{{#if script}}
 			<script src="/assets/js/{{script}}.js"></script>
 		{{/if}}
