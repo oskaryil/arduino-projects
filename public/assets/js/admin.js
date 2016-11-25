@@ -9,6 +9,9 @@ $(document).ready(function() {
         console.log(user);
         $("#user-count").html(users.length);
       });
+    },
+    error: function(error) {
+      console.error(error);
     }
   });
 });
