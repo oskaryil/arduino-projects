@@ -4,6 +4,7 @@ $(document).ready(function() {
     method: 'get',
     url: '/api/users',
     success: function(users) {
+      console.log("works");
       console.log(users);
       users.forEach(function(user) {
         console.log(user);
@@ -11,6 +12,7 @@ $(document).ready(function() {
       });
     },
     error: function(error) {
+      console.log("error");
       console.error(error);
     }
   });
