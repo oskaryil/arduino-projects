@@ -24,6 +24,8 @@ var monk = require('monk');
 var db = monk('localhost:27017/arduinoprojects');
 
 var routes = require('./routes/index');
+var authRoutes = require('./routes/auth');
+var apiRoutes = require('./routes/api');
 // var admin = require('./routes/admin');
 
 var app = express();
@@ -107,6 +109,8 @@ app.use(function(req, res, next) {
 });
 
 app.use('/', routes);
+app.use('/auth', authRoutes);
+app.use('/api', apiRoutes);
 // app.use('/admin', admin);
 
 // catch 404 and forwarding to error handler

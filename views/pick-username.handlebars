@@ -1,0 +1,18 @@
+<div class="container">
+  <h2 class="page-header text-center">Pick a username</h2>
+{{!--     {{#if errors}}
+      {{#each errors}}
+        <div class="alert alert-danger">{{msg}}</div>
+      {{/each}}
+    {{/if}}  --}}
+      <form method="post" action="/auth/pick-username">
+        <div class="form-group">
+          <label>Username</label>
+          <input type="text" class="form-control" name="username" placeholder="Username">
+          <p class="help-block">Username must be <strong>atleast 4 characters long and max 16 characters long</strong>*</p>
+        </div>
+        <div class="form-group">
+          <button type="submit" class="btn btn-success submit-form-btn">Submit</button>
+        </div>
+      </form>
+</div>

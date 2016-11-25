@@ -16,9 +16,13 @@
 		<link href="/assets/css/font-awesome.min.css" rel="stylesheet">
 		<link href="/assets/css/bootstrap-social.css" rel="stylesheet">
 		<link rel="stylesheet" href="assets/animsition/css/animsition.min.css">
+		<link rel="stylesheet" href="assets/summersnote/summernote.css">
 
 		<!-- Custom styles for this template -->
 		<link href="/assets/css/main.css" rel="stylesheet">
+		{{#if stylesheet}}
+		<link rel="stylesheet" href="assets/css/{{stylesheet}}.css">
+		{{/if}}
 
 		<!-- FONTS -->
 		<link href="https://fonts.googleapis.com/css?family=Hammersmith+One" rel="stylesheet">
@@ -61,6 +65,7 @@
 		<script src="/assets/js/bootstrap.min.js"></script>
 		<script src="/assets/js/salvattore.min.js"></script>
 		<script src="assets/animsition/js/animsition.min.js"></script>
+		<script src="assets/summersnote/summernote.min.js"></script>
 		{{#if script}}
 			<script src="/assets/js/{{script}}.js"></script>
 		{{/if}}

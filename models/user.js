@@ -5,6 +5,10 @@ var bcrypt = require('bcryptjs');
 var UserSchema = mongoose.Schema({
   name: String,
   email: String,
+  username: {
+    type: String,
+    default: ''
+  },
   imgUrl: {
     type: String,
     default: "https://s3.amazonaws.com/whisperinvest-images/default.png"

@@ -1,4 +1,8 @@
 $(document).ready(function() {
+  $("#summernote").summernote({
+    height: 300,
+    
+  });
   var fileUrl = "";
 
   function uploadFile(file, signedRequest, url) {

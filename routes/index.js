@@ -12,8 +12,9 @@ var S3_BUCKET = process.env.S3_BUCKET;
 
 var User = require('../models/user');
 var Post = require('../models/post');
+var ensureAuth = require('../config/ensureAuth');
 
-var currentUser;
+// var currentUser;
 var imgLink;
 
 const config = require('../config.json');
@@ -58,7 +59,7 @@ router.get('/', function(req, res, next) {
 	});
 });
 
-router.get('/new-project', ensureAuthenticated, function(req, res, next) {
+router.get('/new-project', ensureAuth.ensureAuthenticated, function(req, res, next) {
   res.render('post-project', {
     title: 'Arduino Projects | Upload a new project',
     script: 'newproject'
@@ -97,6 +98,7 @@ router.get('/posts/:id', function(req, res, next) {
     res.render('post', {
       title: post.postTitle + ' | Arduino Projects',
       post: post,
+      script: 'post'
     });
   });
 });
@@ -109,32 +111,17 @@ router.get('/admin', ensureAdmin, function(req, res, next) {
   });
 });
 
-router.get('/api/posts', function(req, res, next) {
-  var db = req.db;
-  var collection = db.get('posts');
-
-  collection.find({}, {}, function(e, docs) {
-    res.send(docs.reverse());
-  });
-});
-
-router.get('/api/users', function(req, res, next) {
+router.get('/admin/users', function(req, res, next) {
   var db = req.db;
   var collection = db.get('users');
 
   collection.find({}, {}, function(e, docs) {
-    console.log(docs);
-    res.send(docs.reverse());
-  });
-});
-
-router.get('/api/user-posts', function(req, res, next) {
-  var db = req.db;
-  var collection = db.get('posts');
-
-  collection.find({"author.id": req.user.id}, {}, function(e, docs) {
-    console.log(docs);
-    res.send(docs.reverse());
+    res.render('users', {
+      layout: 'dashboard-layout',
+      script: 'admin',
+      title: 'Users | Admin Dashboard',
+      users: docs.reverse()
+    });
   });
 });
 
@@ -146,7 +133,9 @@ router.post('/upload-project', function(req, res, next) {
   var githubRepoLink = req.body.githubRepoLink;
   var author = {
     id: req.user.id || "",
-    name: req.user.username || req.user.facebook.name || req.user.google.name || req.user.github.name,
+    name: req.user.name || req.user.facebook.name || req.user.google.name || req.user.github.name,
+    username: req.user.username,
+    email: req.user.email
   };  
 
   var newPost = new Post();
@@ -223,40 +212,22 @@ router.get('/logout', function(req, res, next) {
   res.redirect('/');
 });
 
-router.get('/profile', ensureAuthenticated, function(req, res, next) {
-  res.render('profile', {
-    title: 'Arduino Projects | Profile',
-    script: 'profile',
-    user: req.user,
+router.get('/profile', ensureAuth.ensureAuthenticated, function(req, res, next) {
+  var db = req.db;
+  var collection = db.get('posts');
+
+  collection.find({"author.id": req.user.id}, {}, function(e, docs) {
+    console.log(docs);
+    res.render('profile', {
+      title: 'Arduino Projects | Profile',
+      script: 'profile',
+      user: req.user,
+      stylesheet: 'profile',
+      posts: docs.reverse()
+    });
+    
   });
 });
-
-router.get('/auth/facebook', passport.authenticate('facebook', { scope: ['email'] }));
-
-router.get('/auth/facebook/callback',
-  passport.authenticate('facebook', { successRedirect: '/profile',
-                                      failureRedirect: '/login' }));
-
-router.get('/auth/google', passport.authenticate('google', { scope: ['email', 'profile'] }));
-
-router.get('/auth/google/callback',
-  passport.authenticate('google', { successRedirect: '/profile',
-                                      failureRedirect: '/login' }));
-
-router.get('/auth/github', passport.authenticate('github', { scope: ['user:email'] }));
-
-router.get('/auth/github/callback',
-  passport.authenticate('github', { successRedirect: '/profile',
-                                      failureRedirect: '/login' }));
-
-function ensureAuthenticated(req, res, next) {
-    if(req.isAuthenticated()) {
-        return next();
-    } else {
-        req.flash('error_msg', 'Please Login to access your profile');
-        res.redirect('/login');
-    }
-}
 
 function ensureAdmin(req, res, next) {
   if(req.isAuthenticated()) {

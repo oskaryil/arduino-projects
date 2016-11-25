@@ -7,11 +7,13 @@
     </div>
     <div class="form-group">
       <label for="components">Compenents</label>
-      <input type="text" class="form-control" id="components" name="components" placeholder="Components" required>
+      <input type="text" class="form-control" id="components" name="components" placeholder="Components separated by a comma" required>
+      <p class="help-block">Separate each component with a comma(,)</p>
     </div>
     <div class="form-group">
       <label>Description</label>
-      <textarea id="project-description-textarea" name="projectDescription" placeholder="Description" required></textarea>
+{{!--       <textarea id="project-description-textarea" name="projectDescription" placeholder="Description" required></textarea> --}}
+      <textarea name="projectDescription" id="summernote"></textarea>
     </div>
     <div class="form-group">
       <label for="github-repo-link">Link to Github repository</label>

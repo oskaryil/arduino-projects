@@ -1,8 +1,43 @@
-{{#if user.facebook.name}}
+<div class="container">
+  <div class="row">
+    <div class="col-md-6">
+      <div id="profile">
+        <div class="profile-header">
+          <h1 class="page-header text-center">Profile</h1>
+        </div>
+        <div class="profile-info center-block">
+          {{#if user.imgUrl}}
+            <img class="img-responsive profile-img center-block" src="{{user.imgUrl}}" />
+          {{/if}}
+          <h2 class="text-center">{{user.name}}</h2>
+          <p class="text-center user-info">Username: {{user.username}}</p>
+          <p class="text-center user-info">Email: {{user.email}}</p>
+          <p class="text-center user-info">Created at: {{user.createdAt}}</p>
+        </div>
+      </div>
+    </div>
+    <div class="col-md-6">
+      <div id="profile-posts">
+        <div class="profile-posts-header">
+          <h1 class="page-header text-center">My Posts</h1>
+        </div>
+        {{#each posts}}
+          <div class="user-post well">
+            <h3 class="text-center">{{postTitle}}  <span class="fa fa-pencil-square"></span></h3>
+          </div>
+        {{/each}}
+      </div>
+    </div>
+  </div>
+</div>
+
+
+{{!-- {{#if user.facebook.name}}
 <h2>Facebook</h2>
 <p>{{user.facebook.email}}</p>
 <p>{{user.facebook.name}}</p>
 <p>{{user.facebook.id}}</p>
+<p>{{user.username}}</p>
 {{/if}}
 
 {{#if user.google.name}}
@@ -11,6 +46,7 @@
 <p>{{user.google.name}}</p>
 <p>{{user.google.id}}</p>
 <p>{{user.local.admin}}</p>
+<p>{{user.username}}</p>
 {{/if}}
 
 {{#if user.github.name}}
@@ -18,4 +54,5 @@
 <p>{{user.github.email}}</p>
 <p>{{user.github.name}}</p>
 <p>{{user.github.id}}</p>
-{{/if}}
+<p>{{user.username}}</p>
+{{/if}} --}}

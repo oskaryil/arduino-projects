@@ -10,16 +10,16 @@ function append(title, content, components, imgUrl, author, postID) {
     h += title;
     h += '</h3>';
     h += '</div>';
-    h += '<p class="post-description text-center">';
+    h += '<div class="posts-description text-center">';
     h += content;
-    h += '</p>';
-    h += '<p class="components text-center">';
+    h += '</div>';
+    h += '<p class="components text-center">Components: ';
     h += components;
     h += '</p>';
-    h += '<p class="post-author text-center">';
-    h += author;
+    h += '<p class="post-author text-center text-info">Posted by: ';
+    h += author.username;
     h += '</p>';
-    h += '<a href="/posts/'+postID+'">Read More</a>';
+    h += '<a class="btn btn-info center-block read-more-btn" href="/posts/'+postID+'">Read More</a>';
     h += '</div>';
     salvattore.appendElements(grid, [item]);
     item.outerHTML = h;
@@ -34,7 +34,8 @@ $.ajax({
         console.log(data);
         data.forEach(function(post) {
             console.log(post);
-            append(post.postTitle, post.description, post.components, post.imgUrl, post.author.name, post._id);
+            console.log(post.description.length);
+            append(post.postTitle, post.description, post.components, post.imgUrl, post.author, post._id);
         });
     }
 });
