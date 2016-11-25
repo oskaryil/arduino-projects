@@ -1,6 +1,6 @@
 {
 "version": 3,
-"mappings": "AACE,yBAAW;EACT,gBAAgB,EAAE,OAAO",
+"mappings": "AACE,yBAAW,CACT,gBAAgB,CAAE,OAAO",
 "sources": ["profile.scss"],
 "names": [],
 "file": "profile.css"
