@@ -2,7 +2,7 @@ body {
 	width: 100%;
   height: 100%;
   margin: 0;
-  margin-bottom: 50px;
+  margin-bottom: 0;
   padding-top: 50px;
   font-family: 'Hammersmith One', sans-serif;
   color: #787878;
@@ -100,4 +100,16 @@ h1, h2, h3, h4, h5 {
   .postDescription {
     text-align: center;
   }
+}
+
+footer {
+  font-family: 'Cantarell', sans-serif !important;
+  font-weight: 700;
+  min-height: 150px;
+  height: auto;
+  max-height: 300px;
+  width: 100%;
+  padding: 50px;
+  background-color: #222222;
+  color: #fff;
 }

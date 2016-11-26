@@ -49,6 +49,9 @@ app.engine('handlebars', exphbs({
       if (config.site.analytics) {
         return config.site.analytics;
       }
+    },
+    get_currentYear: function() {
+      return new Date().getFullYear();
     }
   }
 }));

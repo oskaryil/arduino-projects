@@ -10,7 +10,7 @@
         "clientSecret": "OAUTH CLIENT SECRET FOR GITHUB"
       }
     },
-    "analytics": "UA-00000000-0"
+    "analytics": "UA-88016940-1"
   },
   "deploy":{
     "username": "YOUR USERNAME",
