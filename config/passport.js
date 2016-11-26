@@ -130,22 +130,20 @@ passport.use(new GithubStrategy({
             if(user)
               return done(null, user);
             else {
-              console.log(profile);
               var newUser = new User();
               newUser.github.id = profile.id;
               newUser.github.token = accessToken;
               newUser.github.name = profile.displayName;
               newUser.github.email = profile.emails["value"];
               newUser.name = profile.displayName;
-              newUser.email = profile.emails["value"];
-              newUser.imgUrl = profile.photos["value"];
+              newUser.email = profile.emails[0].value || "";
+              newUser.imgUrl = profile.photos[0].value || "";
               newUser.username = profile.username;
               newUser.save(function(err){
                 if(err)
                   throw err;
                 return done(null, newUser);
               })
-              console.log(profile);
             }
           });
         });
