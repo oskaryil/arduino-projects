@@ -7,7 +7,7 @@ module.exports = {
   'googleAuth': {
     'clientID': '176568116976-jcsannjcqspcej78eu1j8gqvod2s251f.apps.googleusercontent.com',
     'clientSecret': 'oOBNFT8jwPjYLm7QUqq-gnzG',
-    'callbackURL': 'https://arduinoprojects.io/auth/google/callback'
+    'callbackURL': 'http://localhost:8080/auth/google/callback'
   },
   'githubAuth': {
     'clientID': '274c7a9772f033c78023',
