@@ -24,6 +24,7 @@ router.get('/github', passport.authenticate('github', { scope: ['user:email'] })
 router.get('/github/callback',
   passport.authenticate('github', { failureRedirect: '/login' }),
   function(req, res) {
+    res.redirect(ensureAuth.hasUsername(req, res, next));
 });
 
 router.get('/pick-username', ensureAuth.noUsername, function(req, res, next) {
