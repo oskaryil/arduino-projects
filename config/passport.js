@@ -133,10 +133,12 @@ passport.use(new GithubStrategy({
               var newUser = new User();
               newUser.github.id = profile.id;
               newUser.github.token = accessToken;
-              newUser.github.name = profile.name;
-              newUser.github.email = profile.email;
-              newUser.name = profile.name;
-              newUser.email = profile.email,
+              newUser.github.name = profile.displayName;
+              newUser.github.email = profile.emails[0];
+              newUser.name = profile.displayName;
+              newUser.email = profile.emails[0];
+              newUser.imgUrl = profile.photos[0];
+              newUser.username = profile.username;
               newUser.save(function(err){
                 if(err)
                   throw err;

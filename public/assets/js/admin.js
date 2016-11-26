@@ -19,7 +19,6 @@ $(document).ready(function() {
     method: 'get',
     url: '/api/new-users-today',
     success: function(count) {
-      console.log("success");
       $("#new-users-today").html(count);
     },
     error: function(error) {
