@@ -7,11 +7,13 @@ var GithubStrategy = require("passport-github").Strategy;
 var FacebookStrategy = require('passport-facebook').Strategy;
 var dotenv = require('dotenv').config();
 var aws = require('aws-sdk');
+var moment = require('moment');
 var S3_BUCKET = process.env.S3_BUCKET;
 
 
 var User = require('../models/user');
 var Post = require('../models/post');
+var IPLog = require('../models/ip');
 var ensureAuth = require('../config/ensureAuth');
 
 // var currentUser;
@@ -53,10 +55,24 @@ router.get('/sign-s3', function(req, res) {
 
 
 router.get('/', function(req, res, next) {
-	res.render('index', {
-		title: 'Arduino Projects',
+  var db = req.db;
+  var collection = db.get('iplogs');
+  var ip = req.connection.remoteAddress
+
+  collection.findOne({ "ip": ip }, function(e, doc) {
+    if(!doc) {
+      var newIP = new IPLog();
+      newIP.ip = ip;
+      newIP.save(function(err) {
+        if(err) throw err;
+      });
+    }
+  });
+
+  res.render('index', {
+    title: 'Arduino Projects',
     script: 'main'
-	});
+  });
 
 });
 
@@ -105,11 +121,21 @@ router.get('/posts/:id', function(req, res, next) {
 });
 
 router.get('/admin', ensureAdmin, function(req, res, next) {
-  res.render('admin', {
-    title: 'Arduino Projects | Admin Dashboard',
-    layout: 'dashboard-layout',
-    script: 'admin',
+  var db = req.db;
+  var iplogsCollection = db.get('iplogs');
+  var uniqueVisitors = 0;
+  iplogsCollection.find({}, {}, function(e, docs) {
+    uniqueVisitors = docs.length;
+    res.render('admin', {
+      title: 'Arduino Projects | Admin Dashboard',
+      layout: 'dashboard-layout',
+      script: 'admin',
+      uniqueVisitors: uniqueVisitors
+    });
   });
+
+
+
 });
 
 router.get('/admin/users', function(req, res, next) {
@@ -128,7 +154,6 @@ router.get('/admin/users', function(req, res, next) {
 
 router.post('/upload-project', function(req, res, next) {
   var projectName = req.body.postTitle;
-  console.log(projectName);
   var components = req.body.components;
   var description = req.body.projectDescription;
   var githubRepoLink = req.body.githubRepoLink;
@@ -151,9 +176,6 @@ router.post('/upload-project', function(req, res, next) {
   });
   req.flash('success_msg', 'Your project has been uploaded successfully');
   res.redirect('/');
-
-  console.log(newPost);
-
 
 });
 
@@ -195,6 +217,7 @@ router.post('/register', function(req, res, next) {
     newUser.name = name;
     newUser.username = username;
     newUser.local.password = password;
+    newUser.ip = req.connection.remoteAddress;
 
     User.createUser(newUser, function(err, user) {
       if(err) throw err;

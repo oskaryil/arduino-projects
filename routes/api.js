@@ -1,4 +1,5 @@
 var express = require('express');
+var moment = require('moment');
 var router = express.Router();
 
 router.get('/posts', function(req, res, next) {
@@ -25,6 +26,23 @@ router.get('/user-posts', function(req, res, next) {
 
   collection.find({"author.id": req.user.id}, {}, function(e, docs) {
     res.send(docs.reverse());
+  });
+});
+
+router.get('/new-users-today', function(req, res, next) {
+  var db = req.db;
+  var collection = db.get('users');
+  var newUsers = 0;
+
+  collection.find({}, {}, function(e, docs){
+    docs.forEach(function(user) {
+      const createdDate = moment(user.createdAt).format("YYYY-MM-DD");
+      const currentDate = moment().format("YYYY-MM-DD");
+      if(currentDate === createdDate) {
+        newUsers++;
+      }
+    });
+    res.send(newUsers.toString());
   });
 });
 

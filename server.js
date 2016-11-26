@@ -57,7 +57,7 @@ app.engine('handlebars', exphbs({
 }));
 app.set('view engine', 'handlebars');
 
-// app.use(morgan('dev'));
+app.use(morgan('dev'));
 app.use(bodyParser.json()); // Support JSON Encoded bodies
 app.use(bodyParser.urlencoded({extended: true})); // Support encoded bodies
 app.use(cookieParser()); // Use cookieparser

@@ -1,19 +1,30 @@
 $(document).ready(function() {
+
   $.ajax({
     type: 'json',
     method: 'get',
     url: '/api/users',
     success: function(users) {
-      console.log("works");
-      console.log(users);
       users.forEach(function(user) {
-        console.log(user);
         $("#user-count").html(users.length);
       });
     },
     error: function(error) {
-      console.log("error");
       console.error(error);
     }
   });
+
+  $.ajax({
+    type: 'json',
+    method: 'get',
+    url: '/api/new-users-today',
+    success: function(count) {
+      console.log("success");
+      $("#new-users-today").html(count);
+    },
+    error: function(error) {
+      console.error(error);
+    }
+  });
+
 });
