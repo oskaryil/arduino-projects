@@ -44,21 +44,19 @@ var UserSchema = mongoose.Schema({
     token: String,
     email: String,
     name: String,
-    admin: false
   },
   facebook: {
     id: String,
     token: String,
     email: String,
     name: String,
-    admin: false
   },
   github: {
     id: String,
     token: String,
     email: String,
     name: String,
-    admin: false
+    username: String
   }
 });
 

@@ -143,7 +143,7 @@ passport.use(new GithubStrategy({
               }
               newUser.name = profile.displayName;
               newUser.imgUrl = profile.photos[0].value || "";
-              newUser.username = profile.username;
+              newUser.github.username = profile.username;
               newUser.save(function(err){
                 if(err)
                   throw err;
