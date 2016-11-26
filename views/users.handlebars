@@ -12,10 +12,11 @@
             <thead>
               <tr>
                 <td class="text-center"><i class="fa fa-trash"></i></td>
+                <td class="text-center"><i class="fa fa-pencil"></i></td>
                 <td>Post ID</td>
                 <td>Name</td>
                 <td>Date</td>
-                <td>Subject</td>
+                <td>Username</td>
                 <td>Admin</td>
                 <td>Email</td>
               </tr>
@@ -23,7 +24,8 @@
             <tbody id="contact-requests">
             {{#each users}}
               <tr>
-                <td class="text-center"><div class="checkbox margin-t-0"><input id="{{this.id}}" type="checkbox"><label for="{{this.id}}"></label></div></td>
+                <td class="text-center"><div class="checkbox margin-t-0"><input id="{{this._id}}" type="checkbox"><label for="{{this._id}}"></label></div></td>
+                <td class="text-center"><div class="checkbox margin-t-0"><input id="" type="checkbox"><label for=""></label></div></td>
                 <td># <b>{{this._id}}</b></td>
                 <td>{{this.name}}</td>
                 <td>{{this.createdAt}}</td>
