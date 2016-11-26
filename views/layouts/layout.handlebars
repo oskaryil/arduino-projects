@@ -42,7 +42,7 @@
 		<div class="container-fluid">
 			<div class="row">
 			 {{#if success_msg}}
-			  <div class="alert alert-success">{{success_msg}}</div>
+			  <div class="alert alert-success" id="successAlert">{{success_msg}}</div>
 			{{/if}}
 
 			{{#if error_msg}}
@@ -52,6 +52,7 @@
 			{{#if error}}
 			  <div class="alert alert-danger">{{error}}</div>
 			{{/if}}
+				<div class="alert" id="status-area"></div>
 				{{{body}}}
 			</div>
 		</div>
@@ -71,6 +72,7 @@
 		<script src="/assets/js/salvattore.min.js"></script>
 		<script src="assets/animsition/js/animsition.min.js"></script>
 		<script src="assets/summersnote/summernote.min.js"></script>
+		<script src="assets/js/globalFunctions.js"></script>
 		{{#if script}}
 			<script src="/assets/js/{{script}}.js"></script>
 		{{/if}}

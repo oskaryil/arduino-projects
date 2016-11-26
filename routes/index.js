@@ -57,6 +57,7 @@ router.get('/', function(req, res, next) {
 		title: 'Arduino Projects',
     script: 'main'
 	});
+
 });
 
 router.get('/new-project', ensureAuth.ensureAuthenticated, function(req, res, next) {
@@ -190,6 +191,7 @@ router.post('/register', function(req, res, next) {
     var newUser = new User();
     newUser.local.name = name;
     newUser.local.email = email;
+    newUser.email = email;
     newUser.username = username;
     newUser.local.password = password;
 
@@ -217,7 +219,6 @@ router.get('/profile', ensureAuth.ensureAuthenticated, function(req, res, next) 
   var collection = db.get('posts');
 
   collection.find({"author.id": req.user.id}, {}, function(e, docs) {
-    console.log(docs);
     res.render('profile', {
       title: 'Arduino Projects | Profile',
       script: 'profile',

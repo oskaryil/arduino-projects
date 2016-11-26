@@ -1,5 +1,5 @@
 $(document).ready(function() {
-    
+
 function append(title, content, components, imgUrl, author, postID) {
     var grid = document.querySelector('#columns');
     var item = document.createElement('div');

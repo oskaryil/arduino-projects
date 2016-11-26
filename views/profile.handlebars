@@ -22,8 +22,8 @@
           <h1 class="page-header text-center">My Posts</h1>
         </div>
         {{#each posts}}
-          <div class="user-post well">
-            <h3 class="text-center">{{postTitle}}  <span class="fa fa-pencil-square"></span> <button><i class="fa fa-times"></i></button></h3>
+          <div class="user-post well" id="{{_id}}">
+            <h3 class="text-center">{{postTitle}}  <span class="fa fa-pencil-square"></span>  <span id="profile-remove-post-btn" class="fa fa-times"></span></h3>
           </div>
         {{/each}}
       </div>

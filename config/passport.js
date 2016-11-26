@@ -19,6 +19,17 @@ module.exports = function(passport) {
     });
   });
 
+
+  // passport.use('local-signup', new LocalStrategy({
+  //   username: 'username',
+  //   passwordField: 'password',
+  //   passReqToCallback: true
+  // },
+  // function(req, username, password, done) {
+
+  // }
+  // ));
+
   passport.use(new LocalStrategy(
     function(username, password, done) {
       User.getUserByUsername(username, function(err, user) {
@@ -27,7 +38,7 @@ module.exports = function(passport) {
           return done(null, false, {message: 'Unknown User'});
         }
 
-        User.comparePassword(password, user.password, function(err, isMatch) {
+        User.comparePassword(password, user.local.password, function(err, isMatch) {
           if (err) throw err;
           if (isMatch) {
               return done(null, user);

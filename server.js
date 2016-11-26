@@ -11,7 +11,7 @@ var LocalStrategy = require('passport-local').Strategy;
 var GoogleStrategy = require('passport-google-oauth').OAuthStrategy;
 var GithubStrategy = require("passport-github").Strategy;
 var FacebookStrategy = require('passport-facebook').Strategy;
-var logger = require('morgan');
+var morgan = require('morgan'); // logger
 var mongo = require('mongodb');
 var mongoose = require('mongoose');
 mongoose.connect('mongodb://localhost/arduinoprojects');
@@ -57,6 +57,7 @@ app.engine('handlebars', exphbs({
 }));
 app.set('view engine', 'handlebars');
 
+// app.use(morgan('dev'));
 app.use(bodyParser.json()); // Support JSON Encoded bodies
 app.use(bodyParser.urlencoded({extended: true})); // Support encoded bodies
 app.use(cookieParser()); // Use cookieparser
