@@ -130,6 +130,7 @@ passport.use(new GithubStrategy({
             if(user)
               return done(null, user);
             else {
+              console.log(profile);
               var newUser = new User();
               newUser.github.id = profile.id;
               newUser.github.token = accessToken;
