@@ -1,3 +1,8 @@
+html, body {
+  height: 100%;
+}
+
+
 body {
 	width: 100%;
   height: 100%;
@@ -12,6 +17,14 @@ body {
 h1, h2, h3, h4, h5 {
   color: #000000;
 }
+
+#wrapper {
+  padding: 10px;
+  min-height: -webkit-calc(100% - 150px);     /* Chrome */
+  min-height: -moz-calc(100% - 150px);     /* Firefox */
+  min-height: calc(100% - 150px);     /* native */
+}
+
 
 .content {
   h1 {
@@ -106,12 +119,14 @@ footer {
   font-family: 'Cantarell', sans-serif !important;
   font-weight: 700;
   min-height: 150px;
-  height: auto;
+  height: 150px;
   max-height: 300px;
   width: 100%;
   padding: 50px;
   background-color: #222222;
   color: #fff;
+  position: relative;
+  clear: both;
 }
 
 #status-area {

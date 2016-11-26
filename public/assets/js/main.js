@@ -42,7 +42,10 @@ $.ajax({
         data.forEach(function(post) {
             console.log(post);
             console.log(post.description.length);
-            append(post.postTitle, post.description, post.components, post.imgUrl, post.author, post._id);
+            if(post.description.length >= (25) ) {
+              var description = `${post.description.substring(0, 150)} ...`;
+            }
+            append(post.postTitle, description, post.components, post.imgUrl, post.author, post._id);
         });
     }
 });

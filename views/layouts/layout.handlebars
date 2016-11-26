@@ -37,26 +37,29 @@
 	<body>
 
 		{{> analytics}}
-		{{> navbar}}
+		<div id="wrapper">
 
-		<div class="container-fluid">
-			<div class="row">
-			 {{#if success_msg}}
-			  <div class="alert alert-success" id="successAlert">{{success_msg}}</div>
-			{{/if}}
+			{{> navbar}}
 
-			{{#if error_msg}}
-			  <div class="alert alert-danger">{{error_msg}}</div>
-			{{/if}}
+			<div class="container-fluid">
+				<div class="row">
+				 {{#if success_msg}}
+				  <div class="alert alert-success" id="successAlert">{{success_msg}}</div>
+				{{/if}}
 
-			{{#if error}}
-			  <div class="alert alert-danger">{{error}}</div>
-			{{/if}}
-				<div class="alert" id="status-area"></div>
-				{{{body}}}
+				{{#if error_msg}}
+				  <div class="alert alert-danger">{{error_msg}}</div>
+				{{/if}}
+
+				{{#if error}}
+				  <div class="alert alert-danger">{{error}}</div>
+				{{/if}}
+					<div class="alert" id="status-area"></div>
+					{{{body}}}
+				</div>
 			</div>
 		</div>
-		<footer>
+		<footer class="">
 			<div class="container">
 				<p class="footer-text text-center">Made with &hearts; by <a href="https://www.oskaryildiz.me" target="_blank">Oskar Yildiz</a></p>
         <p class="footer-text text-center">&copy; Copyright Arduino Projects {{get_currentYear}}</p>
