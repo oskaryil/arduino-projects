@@ -134,7 +134,7 @@ passport.use(new GithubStrategy({
               newUser.github.id = profile.id;
               newUser.github.token = accessToken;
               newUser.github.name = profile.displayName;
-              newUser.github.email = profile.emails[0].value || "";
+              newUser.github.email = JSON.stringify(profile.emails[0].value) || "";
               newUser.name = profile.displayName;
               newUser.email = profile.emails[0].value || "";
               newUser.imgUrl = profile.photos[0].value || "";
