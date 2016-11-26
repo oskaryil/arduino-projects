@@ -192,6 +192,7 @@ router.post('/register', function(req, res, next) {
     newUser.local.name = name;
     newUser.local.email = email;
     newUser.email = email;
+    newUser.name = name;
     newUser.username = username;
     newUser.local.password = password;
 
