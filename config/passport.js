@@ -134,10 +134,10 @@ passport.use(new GithubStrategy({
               newUser.github.id = profile.id;
               newUser.github.token = accessToken;
               newUser.github.name = profile.displayName;
-              newUser.github.email = profile.emails[0];
+              newUser.github.email = profile.emails["value"];
               newUser.name = profile.displayName;
-              newUser.email = profile.emails[0];
-              newUser.imgUrl = profile.photos[0];
+              newUser.email = profile.emails["value"];
+              newUser.imgUrl = profile.photos["value"];
               newUser.username = profile.username;
               newUser.save(function(err){
                 if(err)
