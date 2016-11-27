@@ -3,7 +3,10 @@ var mongoose = require('mongoose');
 var PostSchema = mongoose.Schema({
   postTitle: String,
   components: String,
-  description: String,
+  description: {
+    type: String,
+    default: ""
+  },
   imgUrl: String,
   author: Object,
 });
