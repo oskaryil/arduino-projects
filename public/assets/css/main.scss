@@ -4,7 +4,7 @@ html, body {
 
 
 body {
-	width: 100%;
+  width: 100%;
   height: 100%;
   margin: 0;
   margin-bottom: 0;
@@ -40,8 +40,6 @@ h1, h2, h3, h4, h5 {
       max-height: 600px;
       max-width: 500px;
       height: 520px;
-      overflow: auto;
-
     }
 
     .posts-img {
@@ -50,22 +48,24 @@ h1, h2, h3, h4, h5 {
       border-radius: 6%;
     }
 
+    .posts-title {
+      font-size: 1.5em;
+      height: 40px;
+    }
+
     .posts-description {
       text-overflow: ellipsis;
-      overflow: hidden;
-      max-height: 100px;
       word-wrap: break-word;
       margin: 0 10px 0 10px;
-
+      height: 150px;
       h1, h2, h3, h4, h5 {
         display: none;
       }
     }
 
-
-
     .read-more-btn {
       margin: 5px 10px 10px 10px;
+      height: 35px;
     }
 
     .components {
@@ -77,6 +77,8 @@ h1, h2, h3, h4, h5 {
 
     .post-author {
     }
+
+
   }
 
    @media screen and (min-width: 1px) and (max-width: 767px) {
