@@ -1,6 +1,8 @@
 <article class="thumbnail" id="post">
   <div class="img-frame">
-    <img class="img-responsive post-img" src="{{post.imgUrl}}" />
+    <a href="{{post.imgUrl}}" class="lightbox-img-link" data-lightbox="post-img">
+      <img class="lightbox-img post-img img-responsive" src="{{post.imgUrl}}" alt="Arduino image" />
+    </a>
   </div>
   <h1 class="text-center">{{post.postTitle}}</h2>
   <div id="postDescription" class="postDescription">

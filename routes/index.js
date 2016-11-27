@@ -108,6 +108,7 @@ router.get('/register', function(req, res, next) {
 });
 
 router.get('/posts/:id', function(req, res, next) {
+
   var db = req.db;
   var collection = db.get('posts');
 
