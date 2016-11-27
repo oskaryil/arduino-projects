@@ -12,6 +12,7 @@
 		{{> favicons}}
 		<title>{{title}}</title>
 
+		<link rel="stylesheet" href="assets/css/normalize.min.css">
 		<!-- Bootstrap core CSS -->
 		<link href="/assets/css/bootstrap.min.css" rel="stylesheet">
 		<link href="/assets/css/font-awesome.min.css" rel="stylesheet">
@@ -47,17 +48,17 @@
 			<div class="container-fluid">
 				<div class="row">
 				 {{#if success_msg}}
-				  <div class="alert alert-success" id="successAlert">{{success_msg}}</div>
+				  <div class="alert alert-dismissible alert-success" id="successAlert">{{success_msg}}</div>
 				{{/if}}
 
 				{{#if error_msg}}
-				  <div class="alert alert-danger">{{error_msg}}</div>
+				  <div class="alert alert-dismissible alert-danger">{{error_msg}}</div>
 				{{/if}}
 
 				{{#if error}}
-				  <div class="alert alert-danger">{{error}}</div>
+				  <div class="alert alert-dismissible alert-danger">{{error}}</div>
 				{{/if}}
-					<div class="alert" id="status-area"></div>
+					<div class="alert alert-dismissible" id="status-area"></div>
 					{{{body}}}
 				</div>
 			</div>

@@ -12,7 +12,7 @@ function append(title, content, components, imgUrl, author, postID) {
     var item = document.createElement('div');
     var h = '<div class="thumbnail">';
     // h += '<div class="thumbnail-content-wrapper">'
-    h += '<img class="img-responsive posts-img" src="'+imgUrl+'" alt="">';
+    h += '<img class="posts-img" src="'+imgUrl+'" alt="">';
     h += '<div class="caption">';
     h += '<h3 class="text-center posts-title">';
     h += title;

@@ -70,7 +70,7 @@ router.get('/', function(req, res, next) {
   });
 
   res.render('index', {
-    title: 'Explore and Share Interesting Projects | Arduino Projects',
+    title: 'Explore and Share Interesting Projects',
     script: 'main'
   });
 
