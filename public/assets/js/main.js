@@ -52,8 +52,9 @@ $.ajax({
         data.forEach(function(post) {
             console.log(post);
             console.log(post.description.length);
+            var description = post.description;
             if(post.description.length >= (25) ) {
-              var description = `${post.description.substring(0, 150)}...`;
+              description = `${post.description.substring(0, 150)}...`;
             }
             append(post.postTitle, description, post.components, post.imgUrl, post.author, post._id);
         });

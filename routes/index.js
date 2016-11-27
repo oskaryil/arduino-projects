@@ -165,6 +165,20 @@ router.post('/upload-project', function(req, res, next) {
     email: req.user.email
   };  
 
+  req.checkBody('postTitle', 'A project title is required').notEmpty();
+  req.checkBody('components', 'At least one component is required.').notEmpty();
+  req.checkBody('projectDescription', 'Description can not be empty.').notEmpty();
+
+  var errors = req.validationErrors();
+
+  if(errors) {
+    res.render('post-project', {
+      title: 'Arduino Projects | Upload a new project',
+      script: 'newproject',
+      errors: errors
+    });
+  }
+
   var newPost = new Post();
   newPost.postTitle = projectName;
   newPost.components = components;
