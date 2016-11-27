@@ -5,10 +5,11 @@
 		<meta http-equiv="X-UA-Compatible" content="IE=edge">
 		<meta name="viewport" content="width=device-width, initial-scale=1">
 		<!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
-		<meta name="description" content="">
-		<meta name="author" content="">
-		<link rel="icon" href="/assets/favicon.ico">
 
+		{{> meta}}
+
+
+		{{> favicons}}
 		<title>{{title}}</title>
 
 		<!-- Bootstrap core CSS -->
@@ -26,6 +27,8 @@
 
 		<!-- FONTS -->
 		<link href="https://fonts.googleapis.com/css?family=Hammersmith+One" rel="stylesheet">
+		<link href="https://fonts.googleapis.com/css?family=Roboto:400,500,700,900" rel="stylesheet">
+		<link href="https://fonts.googleapis.com/css?family=Lato:400,700" rel="stylesheet">
 
 		<!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
 		<!--[if lt IE 9]>
@@ -61,7 +64,10 @@
 		</div>
 		<footer class="">
 			<div class="container">
-				<p class="footer-text text-center">Made with &hearts; by <a href="https://www.oskaryildiz.me" target="_blank">Oskar Yildiz</a></p>
+				<p class="footer-text text-center">Made with     <svg class="heart" viewBox="0 0 32 29.6">
+      <path d="M23.6,0c-3.4,0-6.3,2.7-7.6,5.6C14.7,2.7,11.8,0,8.4,0C3.8,0,0,3.8,0,8.4c0,9.4,9.5,11.9,16,21.2
+      c6.1-9.3,16-12.1,16-21.2C32,3.8,28.2,0,23.6,0z"/>
+    </svg> by <a href="https://www.oskaryildiz.me" target="_blank">Oskar Yildiz</a></p>
         <p class="footer-text text-center">&copy; Copyright Arduino Projects {{get_currentYear}}</p>
 			</div>
 		</footer>
