@@ -13,7 +13,7 @@
     <div class="form-group">
       <label>Description</label>
 {{!--       <textarea id="project-description-textarea" name="projectDescription" placeholder="Description" required></textarea> --}}
-      <textarea name="projectDescription" name="projectDescription" id="summernote" required></textarea>
+      <textarea name="projectDescription" name="projectDescription" id="summernote"></textarea>
     </div>
     <div class="form-group">
       <label for="github-repo-link">Link to Github repository</label>
@@ -23,6 +23,7 @@
       <label for="upload">Images</label>
       <input type="file" name="file" id="file-input" required>
       <p class="help-block">Upload an image of your project. Image must be <strong>.jpg or .png</strong></p>
+      <button class="btn btn-success" id="uploadFileBtn">Upload</button>
     </div>
     <!--
     <div class="checkbox">

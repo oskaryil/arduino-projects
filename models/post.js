@@ -9,6 +9,10 @@ var PostSchema = mongoose.Schema({
   },
   imgUrl: String,
   author: Object,
+  createdAt: {
+    type: Date,
+    default: Date.now
+  }
 });
 
 var Post = module.exports = mongoose.model('Post', PostSchema);

@@ -1,0 +1,44 @@
+<div class="row">
+
+    <!-- Start Panel -->
+    <div class="col-md-12">
+      <div class="panel panel-default">
+        <div class="panel-title">
+          Posts
+        </div>
+        <div class="panel-body table-responsive">
+          <button id="delete-post-btn" class="btn btn-danger">Delete posts</button>
+          <table class="table table-hover">
+            <thead>
+              <tr>
+                <td class="text-center"><i class="fa fa-trash"></i></td>
+                <td class="text-center"><i class="fa fa-pencil"></i></td>
+                <td>Post ID</td>
+                <td>Title</td>
+                <td>Date</td>
+                <td>Author</td>
+                <td>Image</td>
+                <td>Email</td>
+              </tr>
+            </thead>
+            <tbody id="posts-list">
+            {{#each posts}}
+              <tr>
+                <td class="text-center"><div class="checkbox margin-t-0"><input id="{{this._id}}" type="checkbox"><label for="{{this._id}}"></label></div></td>
+                <td class="text-center"><div class="checkbox margin-t-0"><input id="" type="checkbox"><label for=""></label></div></td>
+                <td># <b>{{this._id}}</b></td>
+                <td>{{this.postTitle}}</td>
+                <td>{{this.createdAt}}</td>
+                <td>{{this.author.username}}</td>
+                <td><a href="{{this.imgUrl}}" target="_blank">Image</a></td>
+                <td>{{this.email}}</td>
+              </tr>
+            {{/each}}
+
+            </tbody>
+          </table>
+        </div>
+
+      </div>
+    </div>
+</div>

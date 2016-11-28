@@ -26,6 +26,7 @@ var db = monk('localhost:27017/arduinoprojects');
 var routes = require('./routes/index');
 var authRoutes = require('./routes/auth');
 var apiRoutes = require('./routes/api');
+var adminRoutes = require('./routes/admin');
 // var admin = require('./routes/admin');
 
 var app = express();
@@ -91,6 +92,22 @@ app.use(expressValidator({
       msg   : msg,
       value : value
     };
+  },
+  customValidators: {
+    usernameExists: function(username) {
+      var collection = db.get('users');
+
+      collection.find({"username": username}, function(e, docs) {
+        console.log(e);
+        console.log(docs);
+
+        if(docs.length > 0) {
+          return true;
+        } else {
+          return false;
+        }
+      });
+    }
   }
 }));
 
@@ -116,6 +133,7 @@ app.use(function(req, res, next) {
 app.use('/', routes);
 app.use('/auth', authRoutes);
 app.use('/api', apiRoutes);
+app.use('/admin', adminRoutes);
 // app.use('/admin', admin);
 
 // catch 404 and forwarding to error handler

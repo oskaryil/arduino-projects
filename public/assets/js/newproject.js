@@ -54,10 +54,12 @@ $(document).ready(function() {
       
   }
 
-  $('#file-input').on('change', function() {
+  $('#uploadFileBtn').on('click', function(e) {
     
+    e.preventDefault();
+
     if(initUpload() === 'success') {
-      // $(".status").text('Filen har laddats upp utan problem!');
+      $(this).attr("value", "Success");
     }
 
 

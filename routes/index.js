@@ -121,37 +121,6 @@ router.get('/posts/:id', function(req, res, next) {
   });
 });
 
-router.get('/admin', ensureAdmin, function(req, res, next) {
-  var db = req.db;
-  var iplogsCollection = db.get('iplogs');
-  var uniqueVisitors = 0;
-  iplogsCollection.find({}, {}, function(e, docs) {
-    uniqueVisitors = docs.length;
-    res.render('admin', {
-      title: 'Arduino Projects | Admin Dashboard',
-      layout: 'dashboard-layout',
-      script: 'admin',
-      uniqueVisitors: uniqueVisitors
-    });
-  });
-
-
-
-});
-
-router.get('/admin/users', function(req, res, next) {
-  var db = req.db;
-  var collection = db.get('users');
-
-  collection.find({}, {}, function(e, docs) {
-    res.render('users', {
-      layout: 'dashboard-layout',
-      script: 'admin',
-      title: 'Users | Admin Dashboard',
-      users: docs.reverse()
-    });
-  });
-});
 
 router.post('/upload-project', function(req, res, next) {
   var projectName = req.body.postTitle;
@@ -177,31 +146,31 @@ router.post('/upload-project', function(req, res, next) {
       script: 'newproject',
       errors: errors
     });
+  } else {
+    var newPost = new Post();
+    newPost.postTitle = projectName;
+    newPost.components = components;
+    newPost.description = description;
+    newPost.author = author;
+    newPost.imgUrl = imgLink || "";
+    newPost.githubRepoUrl = githubRepoLink || "";
+    newPost.save(function(err) {
+      if (err) throw err;
+    });
+    req.flash('success_msg', 'Your project has been uploaded successfully');
+    res.redirect('/');
   }
 
-  var newPost = new Post();
-  newPost.postTitle = projectName;
-  newPost.components = components;
-  newPost.description = description;
-  newPost.author = author;
-  newPost.imgUrl = imgLink || "";
-  newPost.githubRepoUrl = githubRepoLink || "";
-  newPost.save(function(err) {
-    if (err) throw err;
-  });
-  req.flash('success_msg', 'Your project has been uploaded successfully');
-  res.redirect('/');
 
 });
 
 router.post('/locallogin',
   passport.authenticate('local', {
-    successRedirect: '/profile',
     failureRedirect:'/login',
     failureFlash: true
   }),
-  function(req, res) {
-    res.redirect('/profile');
+  function(req, res, next) {
+    res.redirect(ensureAuth.hasUsername(req, res, next));
 });
 
 router.post('/register', function(req, res, next) {
@@ -216,6 +185,7 @@ router.post('/register', function(req, res, next) {
   req.checkBody('email', 'Email is required').notEmpty();
   req.checkBody('email', 'Email is not valid').isEmail();
   req.checkBody('username', 'Username is required').notEmpty();
+  req.checkBody('username', 'Username already exists').usernameExists(req.db, username);
   req.checkBody('password', 'Password is required').notEmpty();
   req.checkBody('password2', 'Passwords do not match').equals(req.body.password);
   var errors = req.validationErrors();
@@ -269,15 +239,5 @@ router.get('/profile', ensureAuth.ensureAuthenticated, function(req, res, next) 
   });
 });
 
-function ensureAdmin(req, res, next) {
-  if(req.isAuthenticated()) {
-    if(req.user.admin) {
-      return next();
-    }
-  } else {
-    req.flash('error_msg', 'You need to be an admin to access this page.');
-    res.redirect('/');
-  }
-}
 
 module.exports = router;
