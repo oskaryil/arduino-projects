@@ -1,6 +1,16 @@
 $(document).ready(function() {
   $("#summernote").summernote({
-    height: 300,    
+    toolbar: [
+    // [groupName, [list of button]]
+    ['style', ['bold', 'italic', 'underline', 'clear']],
+    ['font', ['strikethrough', 'superscript', 'subscript']],
+    ['fontsize', ['fontsize']],
+    ['color', ['color']],
+    ['para', ['ul', 'ol', 'paragraph']],
+    ['height', ['height']]
+    ],
+    disableDragAndDrop: true,
+    height: 300
   });
   var fileUrl = "";
 
@@ -38,6 +48,12 @@ $(document).ready(function() {
   }
 
 
+  var success = false;
+
+  function returnSuccess() {
+    success= true;
+  }
+
   function initUpload() {
     const files = document.getElementById('file-input').files;
     const file = files[0];
@@ -59,7 +75,12 @@ $(document).ready(function() {
     e.preventDefault();
 
     if(initUpload() === 'success') {
-      $(this).attr("value", "Success");
+      $("#uploadFileBtn").animate({
+        duration: 300,
+        easing: "easein"
+      }, function() {
+        $("#uploadFileBtn").attr("value", "Success");
+      });
     }
 
 
