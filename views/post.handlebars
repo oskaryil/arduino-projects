@@ -1,10 +1,11 @@
 <article class="thumbnail" id="post">
   <div class="img-frame">
-    <a href="{{post.imgUrl}}" class="lightbox-img-link" data-lightbox="post-img">
+    <a href="{{post.imgUrl}}" class="lightbox-img-link" data-title="{{post.postTitle}}" data-lightbox="post-img">
       <img class="lightbox-img post-img img-responsive" src="{{post.imgUrl}}" alt="Arduino image" />
     </a>
   </div>
   <h1 class="text-center">{{post.postTitle}}</h2>
+  <p class="text-center post-github-repository"><span class="fa fa-code-fork fa-2x"></span> <a href="{{post.githubRepoUrl}}" target="_blank">Github Repo</a></p>
   <p class="post-components text-center"><span class="text-primary">Components:</span> {{post.components}}</p>
   <div id="postDescription" class="postDescription">
   {{{post.description}}}

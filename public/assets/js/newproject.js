@@ -57,12 +57,12 @@ $(document).ready(function() {
   function initUpload() {
     const files = document.getElementById('file-input').files;
     const file = files[0];
-    if(file.type === 'image/jpeg' || file.type === 'image/png') {
+    if(file.type === 'image/png') {
       getSignedRequest(file);
       return 'success';
     } else {
       // clearFileInput("file-input");
-      alert('Only .jpg and .png files are allowed');
+      alert('Only .jpg files are allowed');
     }
     if(file == null) {
       alert('no file selected');

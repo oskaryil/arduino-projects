@@ -12,7 +12,8 @@ var PostSchema = mongoose.Schema({
   createdAt: {
     type: Date,
     default: Date.now
-  }
+  },
+  githubRepoUrl: String,
 });
 
 var Post = module.exports = mongoose.model('Post', PostSchema);
