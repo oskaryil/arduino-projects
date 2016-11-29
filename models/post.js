@@ -14,6 +14,7 @@ var PostSchema = mongoose.Schema({
     default: Date.now
   },
   githubRepoUrl: String,
+  youtubeLink: String
 });
 
 var Post = module.exports = mongoose.model('Post', PostSchema);

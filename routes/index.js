@@ -127,6 +127,7 @@ router.post('/upload-project', function(req, res, next) {
   var components = req.body.components;
   var description = req.body.projectDescription;
   var githubRepoLink = req.body.githubRepoLink;
+  var youtubeLink = req.body.youtubeLink;
   var author = {
     id: req.user.id || "",
     name: req.user.name || req.user.facebook.name || req.user.google.name || req.user.github.name,
@@ -154,6 +155,7 @@ router.post('/upload-project', function(req, res, next) {
     newPost.author = author;
     newPost.imgUrl = imgLink || "";
     newPost.githubRepoUrl = githubRepoLink || "";
+    newPost.youtubeLink = youtubeLink || "";
     newPost.save(function(err) {
       if (err) throw err;
     });
