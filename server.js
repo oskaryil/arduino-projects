@@ -43,7 +43,7 @@ app.engine('handlebars', exphbs({
     get_name: config.site.name,
     has_analytics: function(opts) {
       const fnTrue = opts.fn;
-      const fnFalse = opts.inverse;
+      const fnFalse = opts.inverse  ;
       return (config.site.analytics && config.site.analytics !== false) ? fnTrue() : fnFalse();
     },
     get_analytics: function(opts) {

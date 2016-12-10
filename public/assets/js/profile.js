@@ -12,7 +12,7 @@ $(document).ready(function() {
     }
   });
 
-  var $removeBtn = $('#profile-remove-post-btn');
+  var $removeBtn = $('.profile-remove-post-btn');
 
   $removeBtn.on('click', function(e) {
     e.preventDefault();
@@ -29,10 +29,10 @@ $(document).ready(function() {
       },
       success: function(data) {
         if(data.success) {
-          $("#"+postID).fadeOut(2000);
+          $("#"+postID).fadeOut(1000);
           setTimeout(function() {
             flashMessage("success", "Your post was successfully removed.");
-          }, 1000);
+          }, 500);
         } else {
           alert('an error occured when deleting your post');     
         }
