@@ -121,6 +121,69 @@ router.get('/posts/:id', function(req, res, next) {
   });
 });
 
+router.get('/posts/:id/edit', ensureAuth.ensureAuthenticated, function(req, res, next) {
+  
+
+  var db = req.db;
+  var collection = db.get('posts');
+
+  collection.findOne({_id: req.params.id}, function(e, post) {
+    if(req.user.id === post.author.id) {
+      res.render('edit-post', {
+        title: 'Edit | ' + post.postTitle + ' | Arduino Projects',
+        post: post,
+        script: 'edit-post'
+      });
+    } else {
+      res.render('invalid-user-error');
+    }
+  });
+});
+
+
+router.post('/posts/:id/edit-project', ensureAuth.ensureAuthenticated, function(req, res) {
+  var db = req.db;
+  var collection = db.get('posts');
+
+  var projectName = req.body.postTitle;
+  var components = req.body.components;
+  var description = req.body.projectDescription;
+  var githubRepoLink = req.body.githubRepoLink;
+  var youtubeLink = req.body.youtubeLink;
+  var author = {
+    id: req.user.id || "",
+    name: req.user.name || req.user.facebook.name || req.user.google.name || req.user.github.name,
+    username: req.user.username,
+    email: req.user.email
+  };  
+
+  req.checkBody('postTitle', 'A project title is required').notEmpty();
+  req.checkBody('components', 'At least one component is required.').notEmpty();
+  req.checkBody('projectDescription', 'Description can not be empty.').notEmpty();
+
+  var errors = req.validationErrors();
+
+  if(errors) {
+    res.render('post-project', {
+      title: 'Arduino Projects | Upload a new project',
+      script: 'newproject',
+      errors: errors
+    });
+  } else {
+    collection.findOne({_id: req.params.id}, function(e, post) {
+      collection.update({'postTitle': post.postTitle, 'components': post.components, 'description' : post.description, 'githubRepoLink': post.githubRepoLink, 'youtubeLink' : post.youtubeLink}, {$set:{'postTitle': projectName, 'components': components, 'description' : description, 'githubRepoLink':  githubRepoLink, 'youtubeLink' : youtubeLink}}, function(err, object) {
+        console.log('collection update');
+        if(err) {
+          console.warn(err.message);
+        } else {
+          res.redirect('/profile');
+        }
+      });
+    });  
+    req.flash('success_msg', 'Your project has been successfully updated');
+    res.redirect('/profile');
+  }
+});
 
 router.post('/upload-project', function(req, res, next) {
   var projectName = req.body.postTitle;

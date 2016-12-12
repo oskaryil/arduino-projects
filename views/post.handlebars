@@ -5,7 +5,9 @@
     </a>
   </div>
   <h1 class="text-center">{{post.postTitle}}</h2>
+  {{#if post.githubrepoUrl}}
   <p class="text-center post-github-repository"><span class="fa fa-code-fork fa-2x"></span> <a href="{{post.githubRepoUrl}}" target="_blank">Github Repo</a></p>
+  {{/if}}
   <p class="post-components text-center"><span class="text-primary">Components:</span> {{post.components}}</p>
   <div id="postDescription" class="postDescription">
   {{{post.description}}}

@@ -1,0 +1,38 @@
+<div class="container">
+  <h2 class="page-header">Edit Project</h2>
+  <form class="edit-project-form" id="edit-project" action="edit-project" method="post">
+    <div class="form-group">
+      <label for="project">Project name</label>
+      <input type="text" class="form-control" id="posttitle" name="postTitle" placeholder="Project name" value="{{post.postTitle}}" required>
+    </div>
+    <div class="form-group">
+      <label for="components">Compenents</label>
+      <input type="text" class="form-control" id="components" name="components" placeholder="Components separated by a comma" value="{{post.components}}" required>
+      <p class="help-block">Separate each component with a comma(,)</p>
+    </div>
+    <div class="form-group">
+      <label>Description</label>
+{{!--       <textarea id="project-description-textarea" name="projectDescription" placeholder="Description" required></textarea> --}}
+      <textarea name="projectDescription" name="projectDescription" id="summernote">{{post.description}}</textarea>
+    </div>
+    <div class="form-group">
+      <label for="githubRepoLink"><span class="fa fa-code-fork"></span> Link to Github repository</label>
+      <input type="text" class="form-control" id="githubRepoLink" name="githubRepoLink" placeholder="Github repository url" value="{{post.githubRepoLink}}">
+    </div>
+    <div class="form-group">
+      <label for="youtubeLink"><span class="fa fa-youtube"></span> Youtube Video Link</label>
+      <input type="text" class="form-control" id="youtubeLink" name="youtubeLink" placeholder="Youtube video url" value="{{post.youtubeLink}}">
+    </div>
+    <div class="form-group">
+      <label for="upload">Images</label>
+      <img class="img-responsive edit-project-img" src="{{post.imgUrl}}">
+    </div>
+    <!--
+    <div class="checkbox">
+      <label>
+        <input type="checkbox"> Check me out
+      </label>
+    </div>-->
+    <button type="submit" id="project-submit-btn" class="btn btn-primary btn-block">Update Project</button>
+  </form>
+</div>

@@ -237,3 +237,10 @@ body.loading .modal {
 #project-submit-btn {
   margin-bottom: 50px;
 }
+
+#edit-project {
+  .edit-project-img {
+    max-height: 200px;
+    max-width: 300px;
+  }
+}
