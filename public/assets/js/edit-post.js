@@ -5,7 +5,7 @@ $(document).ready(function() {
     ['style', ['bold', 'italic', 'underline', 'clear']],
     ['font', ['strikethrough', 'superscript', 'subscript']],
     ['fontsize', ['fontsize']],
-    ['fontname', ['Lato']],
+    ['fontname', ['Lato', 'Arial', 'Arial Black', 'Helvetica']],
     ['color', ['color']],
     ['para', ['ul', 'ol', 'paragraph']],
     ['height', ['height']]
