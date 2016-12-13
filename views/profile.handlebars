@@ -23,7 +23,9 @@
         </div>
         {{#each posts}}
           <div class="user-post well" id="{{_id}}">
-            <h3 class="text-center">{{postTitle}}  <span class="fa fa-pencil-square profile-edit-post-btn"></span>  <span class="fa fa-times profile-remove-post-btn"></span></h3>
+            <h3 class="text-center">{{postTitle}}  
+            <span class="fa fa-pencil-square-o profile-edit-post-btn profile-post-btn" data-toggle="tooltip" data-placement="bottom" title="" data-original-title="Edit project"></span> 
+            <span class="fa fa-times profile-remove-post-btn profile-post-btn" data-toggle="tooltip" data-placement="bottom" title="" data-original-title="Delete Project"></span></h3>
           </div>
         {{/each}}
       </div>

@@ -1,5 +1,7 @@
 $(document).ready(function() {
   
+  $('[data-toggle="tooltip"]').tooltip(); 
+
   var posts;
 
   $.ajax({
@@ -27,27 +29,34 @@ $(document).ready(function() {
 
   $removeBtn.on('click', function(e) {
     e.preventDefault();
-    var $h3tag = $(e.target.parentElement);
 
-    var postID = $h3tag.parent()[0].id;
+    if(confirm('Are you sure you want to delete the project?')) {
+      var $h3tag = $(e.target.parentElement);
 
-    $.ajax({
-      method: 'post',
-      type: 'json',
-      url: '/api/remove-post',
-      data: {
-        postID: postID
-      },
-      success: function(data) {
-        if(data.success) {
-          $("#"+postID).fadeOut(1000);
-          setTimeout(function() {
-            flashMessage("success", "Your post was successfully removed.");
-          }, 500);
-        } else {
-          alert('an error occured when deleting your post');     
+      var postID = $h3tag.parent()[0].id;
+
+      $.ajax({
+        method: 'post',
+        type: 'json',
+        url: '/api/remove-post',
+        data: {
+          postID: postID
+        },
+        success: function(data) {
+          if(data.success) {
+            $("#"+postID).fadeOut(1000);
+            setTimeout(function() {
+              flashMessage("success", "Your post was successfully removed.");
+            }, 500);
+          } else {
+            alert('an error occured when deleting your post');     
+          }
         }
-      }
-    });
+      });
+    } else {
+      
+    }
+
+
   });
 });

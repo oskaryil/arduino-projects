@@ -1,6 +1,6 @@
 {
 "version": 3,
-"mappings": "AACE,yBAAW,CACT,gBAAgB,CAAE,OAAO",
+"mappings": "AACE,yBAAW,CACT,gBAAgB,CAAE,OAAO,CAMzB,4BAAG,CACD,SAAS,CAAE,GAAG,CAGhB,8BAAK,CACH,SAAS,CAAE,MAAM,CAMrB,gCAAkB,CAChB,OAAO,CAAE,YAAY,CACrB,KAAK,CAAE,OAAO,CACd,uCAAO,CACL,KAAK,CAAE,OAAO",
 "sources": ["profile.scss"],
 "names": [],
 "file": "profile.css"

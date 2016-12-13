@@ -5,5 +5,24 @@
     p {
       
     }
+
+    h3 {
+      font-size: 2em;
+    }
+
+    span {
+      font-size: 0.85em;
+    }
+
+
   }
+
+  .profile-post-btn {
+    display: inline-block;
+    color: #2196F3;
+    :hover {
+      color: #C2C2C2;
+    }
+  }
+
 }
