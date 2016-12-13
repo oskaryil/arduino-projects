@@ -128,7 +128,7 @@ router.get('/posts/:id/edit', ensureAuth.ensureAuthenticated, function(req, res,
   var collection = db.get('posts');
 
   collection.findOne({_id: req.params.id}, function(e, post) {
-    if(req.user.id === post.author.id) {
+    if(req.user.id === post.author.id || req.user.admin) {
       res.render('edit-post', {
         title: 'Edit | ' + post.postTitle + ' | Arduino Projects',
         post: post,
