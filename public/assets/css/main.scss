@@ -41,12 +41,24 @@ p {
 }
 
 
+#loadMore {
+  display: none;
+}
+
+
 .content {
   h1 {
     font-size: 4em;
   }
 
   #posts {
+
+    #columns {
+      div {
+        // display: none;
+      }
+    }
+
     .thumbnail {
       -webkit-box-shadow: -12px 10px 10px -2px rgba(66, 66, 66, 0.4);
       -moz-box-shadow: -12px 10px 10px -2px rgba(66, 66, 66, 0.4);

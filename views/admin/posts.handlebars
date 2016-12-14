@@ -25,7 +25,7 @@
             {{#each posts}}
               <tr>
                 <td class="text-center"><div class="checkbox margin-t-0"><input id="{{this._id}}" type="checkbox"><label for="{{this._id}}"></label></div></td>
-                <td class="text-center"><div class="checkbox margin-t-0"><input id="" type="checkbox"><label for=""></label></div></td>
+                <td class="text-center"><a href="/posts/{{this._id}}/edit"><span class="fa fa-pencil-square"></span></a></td>
                 <td># <b>{{this._id}}</b></td>
                 <td>{{this.postTitle}}</td>
                 <td>{{this.createdAt}}</td>

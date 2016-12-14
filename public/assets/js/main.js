@@ -53,13 +53,40 @@ $.ajax({
             console.log(post);
             console.log(post.description.length);
             var description = post.description;
-            if(post.description.length >= (25) ) {
+            if(post.description.length >= (40) ) {
               description = `${post.description.substring(0, 150)}...`;
             }
             append(post.postTitle, description, post.components, post.imgUrl, post.author, post._id);
         });
     }
 });
+
+$(".posts-img").lazyload({
+  threshold: 200
+});
+
+// $(function() {
+//   console.log($("#columns .col-md-4"));
+//   console.log(  $("#columns .col-md-4").slice(0, 6).show()
+// );
+//   $("#columns div").slice(0, 6).show();
+//   if($("#columns div").length > 6) {
+//     $("#loadMore").show();
+//   } else {
+//     $("#loadMore").hide();
+//   }
+//   $("#loadMore").on('click', function(e) {
+//     e.preventDefault();
+//     $("#columns div:hidden").slice(0, 6).slideDown();
+//     if($("#columns div:hidden").length == 0) {
+//       $("#load").fadeOut("slow");
+//     }
+
+//     $("html, body").animate({
+//       scrollTop: $(this).offset().top
+//     }, 1500);
+//   });
+// });
 
   // $(".animsition").animsition({
   //   inClass: 'fade-in',
