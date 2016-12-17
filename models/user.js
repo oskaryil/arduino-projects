@@ -7,6 +7,8 @@ var UserSchema = mongoose.Schema({
   email: String,
   username: {
     type: String,
+    required: true,
+    unique: true,
     default: ''
   },
   imgUrl: {
