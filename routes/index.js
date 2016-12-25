@@ -14,6 +14,7 @@ var S3_BUCKET = process.env.S3_BUCKET;
 var User = require('../models/user');
 var Post = require('../models/post');
 var IPLog = require('../models/ip');
+var ContactMessage = require('../models/contact');
 var ensureAuth = require('../config/ensureAuth');
 
 // var currentUser;
@@ -113,6 +114,34 @@ router.get('/contact', function(req, res, next) {
     title: 'Arduino Projects | Contact',
     script: 'contact'
   });
+});
+
+router.post('/contact', function(req, res) {
+
+  req.checkBody('name', 'A name is required.').notEmpty();
+  req.checkBody('email', 'An email is required.').notEmpty();
+  req.checkBody('message', 'A message is required.').notEmpty();
+
+  var errors = req.validationErrors();
+
+  if(errors) {
+    res.render('contact', {
+      title: 'Arduino Projects | Contact',
+      script: 'contact',
+      errors: errors
+    });
+  } else {
+    var newContactMessage = new ContactMessage();
+    newContactMessage.name = req.body.name;
+    newContactMessage.email = req.body.email;
+    newContactMessage.subject = req.body.subject || "";
+    newContactMessage.message = req.body.message;
+    newContactMessage.save(function(err) {
+      if (err) throw err;
+    });
+    req.flash('success_msg', 'Your message has successfully been sent');
+    res.redirect('/');
+  }
 });
 
 router.get('/posts/:id', function(req, res, next) {
