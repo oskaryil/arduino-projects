@@ -4,11 +4,19 @@ var bcrypt = require('bcryptjs');
 // User Schema
 var UserSchema = mongoose.Schema({
   name: String,
-  email: String,
+  email: {
+    type: String,
+    index: {
+      unique: true,
+      dropDups: true
+    }
+  },
   username: {
     type: String,
-    required: true,
-    unique: true,
+    index: {
+      unique: true,
+      dropDups: true
+    },
     default: ''
   },
   imgUrl: {
@@ -29,7 +37,10 @@ var UserSchema = mongoose.Schema({
   local: {
     username: {
       type: String,
-      index: true
+      index: {
+        unique: true,
+        dropDups: true
+      }
     },
     password: {
       type: String
@@ -59,6 +70,14 @@ var UserSchema = mongoose.Schema({
     email: String,
     name: String,
     username: String
+  }
+});
+
+UserSchema.post('save', function(error, doc, next) {
+  if (error.name === 'MongoError' && error.code === 11000) {
+    next(new Error('There was a duplicate key error'));
+  } else {
+    next(error);
   }
 });
 

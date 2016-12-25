@@ -1,6 +1,8 @@
 var express = require('express');
 var router = express.Router();
 
+var Post = require('../models/post');
+
 const ensureAuth = require('../config/ensureAuth');
 
 router.get('/', ensureAuth.ensureAdmin, function(req, res, next) {
@@ -18,7 +20,7 @@ router.get('/', ensureAuth.ensureAdmin, function(req, res, next) {
   });
 });
 
-router.get('/users', function(req, res, next) {
+router.get('/users', ensureAuth.ensureAdmin, function(req, res, next) {
   var db = req.db;
   var collection = db.get('users');
 
@@ -32,7 +34,7 @@ router.get('/users', function(req, res, next) {
   });
 });
 
-router.get('/posts', function(req, res, next) {
+router.get('/posts', ensureAuth.ensureAdmin, function(req, res, next) {
 
   var db = req.db;
   var collection = db.get('posts');
@@ -40,11 +42,30 @@ router.get('/posts', function(req, res, next) {
   collection.find({}, {}, function(e, posts) {
     res.render('admin/posts', {
       layout: 'dashboard-layout',
-      scripts: 'admin-posts',
+      script: 'admin-posts',
       title: 'Posts | Admin Dashboard',
       posts: posts.reverse()
     });
   });
+
+});
+
+router.post('/posts/deletePost', ensureAuth.ensureAdmin, function(req, res) {
+  console.log(req.body);
+
+  var checkedPostsId = req.body[0] || "";
+  checkedPostsId.forEach(function(id) {
+    Post.remove({_id: id}, function(err) {
+      if(err) {
+        res.send({'success': false});
+        console.log('A mongoose error occured');
+        console.error(err);
+        return;
+      }
+    });
+  });
+
+  res.send({'success': true});
 
 });
 

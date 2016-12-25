@@ -245,15 +245,21 @@ router.post('/register', function(req, res, next) {
   var password = req.body.password;
   var password2 = req.body.password2;
 
+
+  // var db = req.db;
+  // var collection = db.get('users');
+
   // Validation
   req.checkBody('name', 'Name is required').notEmpty();
   req.checkBody('email', 'Email is required').notEmpty();
   req.checkBody('email', 'Email is not valid').isEmail();
   req.checkBody('username', 'Username is required').notEmpty();
-  req.checkBody('username', 'Username already exists').usernameExists(req.db, username);
+  // req.checkBody('username', 'Username already exists').usernameExists(username);
   req.checkBody('password', 'Password is required').notEmpty();
   req.checkBody('password2', 'Passwords do not match').equals(req.body.password);
   var errors = req.validationErrors();
+
+
 
   if(errors) {
     res.render('register', {
@@ -266,12 +272,13 @@ router.post('/register', function(req, res, next) {
     newUser.email = email;
     newUser.name = name;
     newUser.username = username;
+    newUser.local.username = username;
     newUser.local.password = password;
     newUser.ip = req.connection.remoteAddress;
 
     User.createUser(newUser, function(err, user) {
-      if(err) throw err;
-      console.log(user);
+      if(err) return next(err);
+      
     });
 
     req.flash('success_msg', 'You are registered and can now log in');

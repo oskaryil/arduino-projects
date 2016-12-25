@@ -58,7 +58,9 @@ app.engine('handlebars', exphbs({
 }));
 app.set('view engine', 'handlebars');
 
-app.use(morgan('dev'));
+if(process.env.NODE_ENV = 'development') {
+  app.use(morgan('dev'));
+}
 app.use(bodyParser.json()); // Support JSON Encoded bodies
 app.use(bodyParser.urlencoded({extended: true})); // Support encoded bodies
 app.use(cookieParser()); // Use cookieparser
@@ -97,13 +99,14 @@ app.use(expressValidator({
     usernameExists: function(username) {
       var collection = db.get('users');
 
-      collection.find({"username": username}, function(e, docs) {
+      collection.findOne({"username": username}, function(e, doc) {
         console.log(e);
         console.log(docs);
 
         if(docs.length > 0) {
           return true;
-        } else {
+        } else if(docs.error === true) {
+          console.log('return false');
           return false;
         }
       });
@@ -123,6 +126,11 @@ app.use(function(req, res, next) {
   next();
 });
 
+
+app.use(function (err, req, res, next) {
+  console.error(err.stack);
+  res.status(500).send('Something broke!');
+});
 
 // Make our db accessible to our router
 app.use(function(req, res, next) {
