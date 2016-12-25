@@ -1,4 +1,22 @@
+#profile {
+
+
+  .profile-header {}
+
+  .profile-info {
+    .user-info-name {
+      font-size: 2em;
+    }
+  }
+}
+
+
 #profile-posts {
+
+  h1 {
+    font-size: 3em;
+  }
+  
   .user-post {
     background-color: #ffffff;
 

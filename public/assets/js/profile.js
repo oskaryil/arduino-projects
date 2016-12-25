@@ -10,7 +10,6 @@ $(document).ready(function() {
     url: '/api/user-posts',
     success: function(posts) {
       posts = posts;
-      console.log(posts);
     }
   });
 

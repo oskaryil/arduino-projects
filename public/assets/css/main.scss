@@ -128,10 +128,38 @@ p {
   }           
 }
 
+.login-page {
 
+}
 
 .login-btns {
-  margin-bottom: 12px;
+  height: 200px;
+  width: 200px;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  float: left;
+
+  margin-left: 20px;
+  
+
+  span {
+    display: -webkit-flex; /* Safari */
+    -webkit-align-items: center; /* Safari 7.0+ */
+    align-items: center;
+    display: flex;
+
+    font-size: 2.5em;
+  }
+
+  @media screen and (max-width: 1024px) {
+    font-size: 1.25em;
+    height: 100px;
+    margin-left: 0;
+    margin-bottom: 8px;
+    width: 100%;
+
+  }
 }
 
 #post {

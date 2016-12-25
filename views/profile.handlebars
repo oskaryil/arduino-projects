@@ -9,10 +9,10 @@
           {{#if user.imgUrl}}
             <img class="img-responsive profile-img center-block" src="{{user.imgUrl}}" />
           {{/if}}
-          <h2 class="text-center">{{user.name}}</h2>
-          <p class="text-center user-info">Username: {{user.username}}</p>
-          <p class="text-center user-info">Email: {{user.email}}</p>
-          <p class="text-center user-info">Created at: {{user.createdAt}}</p>
+          <h2 class="text-center user-info-name">{{user.name}}</h2>
+          <p class="text-center user-info user-info-username">Username: {{user.username}}</p>
+          <p class="text-center user-info user-info-email">Email: {{user.email}}</p>
+          <p class="text-center user-info user-info-date">Created at: {{user.createdAt}}</p>
         </div>
       </div>
     </div>

@@ -86,6 +86,7 @@ router.get('/new-project', ensureAuth.ensureAuthenticated, function(req, res, ne
 router.get('/login', function(req, res, next) {
   res.render('login', {
     title: 'Arduino Projects | Login',
+    script: 'login-page'
   });
 });
 
@@ -104,6 +105,13 @@ router.get('/locallogin', function(req, res, next) {
 router.get('/register', function(req, res, next) {
   res.render('register', {
     title: 'Arduino Projects | Sign up',
+  });
+});
+
+router.get('/contact', function(req, res, next) {
+  res.render('contact', {
+    title: 'Arduino Projects | Contact',
+    script: 'contact'
   });
 });
 
